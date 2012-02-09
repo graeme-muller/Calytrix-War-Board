@@ -1,0 +1,40 @@
+{% extends "main/core.html" %}
+
+{% block html_body %}
+    <div class="errorpage">
+        <h1>An Error Occurred On This Page</h1>
+
+        <p>Error code: <span class="errorcode">500 - Internal Server Error</span></p>
+        <p>An error which the server was unable to handle occurred while it was processing your request.</p>
+        <p><a href="/">Return Home</a></p>
+
+        <p>Contact <a href="mailto:support@calytrix.com?subject=[500 Error]">Calytrix Support</a> if this problem persists.</p>
+        <p>To help Calytrix Support rectify this problem please expand the error message below, copy it and paste it into the email with your comments.</p>
+        <p>Alternatively you could attach the HTML file containing the error message stored on the server at {{ log_filepath }}</p>
+
+        <p id="display">Display error message</p>
+        <div id="error500" style="display:none;">
+        	{{ traceback|safe }}
+        </div>
+
+        <script type="text/javascript">
+            // Javascript that expands and collapses the django traceback
+            $(document).ready(function()
+            {
+                $("#display").click(function()
+                {
+                    if ( $("#error500").css("display") == "none")
+                    {
+                        $("#error500").css({display: "block"});
+                        $("#display").html('Hide error message');
+                    }
+                    else if ($("#error500").css("display") == "block")
+                    {
+                        $("#error500").css({display: "none"});
+                        $("#display").html('Display error message');
+                    }
+                });
+            });
+        </script>
+    </div>
+{% endblock %}

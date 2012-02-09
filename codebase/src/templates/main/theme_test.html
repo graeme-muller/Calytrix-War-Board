@@ -1,0 +1,254 @@
+{% extends "main/core.html" %}
+{% load webdesign %}
+
+{% block html_body %}
+	<body id="core">
+		<p>
+			{% now "U T Z O" %}:{% if user.is_authenticated %}{{ user }} is LOGGED IN{% else %}NOT LOGGED IN{% endif %}
+		</p>
+		<p>
+			Current Theme: {{ user_site_profile.theme }}
+		</p>
+
+		<div class="menu-bar" >
+			<ul class="menu">
+				<li><a href="/">{% lorem 2 w %}</a></li>
+				<li><a href="/">{% lorem 2 w %}</a>
+					<ul>
+						<li><a href="/">{% lorem 2 w %} &raquo;</a>
+							<ul>
+								<li><a href="/">{% lorem 2 w %} &raquo;</a>
+									<ul>
+										<li><a href="/">{% lorem 2 w %} &raquo;</a>
+											<ul>
+												<li><a href="/">{% lorem 2 w %}</a></li>
+												<li><a href="/">{% lorem 2 w %}</a></li>
+												<li><a href="/">{% lorem 2 w %}</a></li>
+											</ul>
+										</li>
+										<li><a href="/">{% lorem 2 w %}</a></li>
+										<li><a href="/">{% lorem 2 w %}</a></li>
+									</ul>
+								</li>
+								<li><a href="/">{% lorem 2 w %}</a></li>
+								<li><a href="/">{% lorem 2 w %}</a></li>
+							</ul>
+						</li>
+						<li><a href="/">{% lorem 2 w %}</a></li>
+						<li><a href="/">{% lorem 2 w %}</a></li>
+					</ul>
+				</li>
+				<li><a href="/">{% lorem 2 w %}</a></li>
+			</ul>
+			<div class="action-bar">
+				<ul class="menu">
+					<li><a href="/">My Profile</a>
+					</li>
+					<li><a href="/">Log Out</a></li>
+				</ul>
+			</div>
+		</div>
+
+		<hr>
+		<h1>Headings:</h1>
+		<hr>
+		<h1>Heading Level 1</h1>
+		{% lorem 1 p %}
+		<h2>Heading Level 2</h2>
+		{% lorem 1 p %}
+		<h3>Heading Level 3</h3>
+		{% lorem 1 p %}
+		<h4>Heading Level 4</h4>
+		{% lorem 1 p %}
+		<h5>Heading Level 5</h5>
+		{% lorem 1 p %}
+		<h6>Heading Level 6</h6>
+		{% lorem 1 p %}
+
+		<!-- Accordion -->
+		<hr>
+		<h1>Accordion</h1>
+		<hr>
+		<div role="tablist" class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" id="accordion">
+			<h3 tabindex="0" aria-selected="true" aria-expanded="true" role="tab" class="ui-accordion-header ui-helper-reset ui-state-default ui-state-active ui-corner-top"><span class="ui-icon ui-icon-triangle-1-s"></span><a tabindex="-1" href="#">Section 1</a></h3>
+			<div role="tabpanel" style="height: 125px;" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom ui-accordion-content-active">
+				{% lorem 2 p %}
+			</div>
+			<h3 tabindex="-1" aria-selected="false" aria-expanded="false" role="tab" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all"><span class="ui-icon ui-icon-triangle-1-e"></span><a tabindex="-1" href="#">Section 2</a></h3>
+			<div role="tabpanel" style="height: 125px; display: none;" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+				{% lorem 2 p %}
+			</div>
+			<h3 tabindex="-1" aria-selected="false" aria-expanded="false" role="tab" class="ui-accordion-header ui-helper-reset ui-state-default ui-corner-all"><span class="ui-icon ui-icon-triangle-1-e"></span><a tabindex="-1" href="#">Section 3</a></h3>
+			<div role="tabpanel" style="height: 125px; display: none;" class="ui-accordion-content ui-helper-reset ui-widget-content ui-corner-bottom">
+				{% lorem 2 p %}
+				<ul>
+					<li>List item one</li>
+					<li>List item two</li>
+					<li>List item three</li>
+				</ul>
+			</div>
+		</div>
+
+		<!-- Tabs -->
+		<hr>
+		<h1>Tabs</h1>
+		<hr>
+		<div class="ui-tabs ui-widget ui-widget-content ui-corner-all" id="tabs">
+			<ul class="ui-tabs-nav ui-helper-reset ui-helper-clearfix ui-widget-header ui-corner-all">
+				<li class="ui-state-default ui-corner-top ui-tabs-selected ui-state-active"><a href="#tabs-1">First</a></li>
+				<li class="ui-state-default ui-corner-top"><a href="#tabs-2">Second</a></li>
+
+				<li class="ui-state-default ui-corner-top"><a href="#tabs-3">Third</a></li>
+			</ul>
+			<div class="ui-tabs-panel ui-widget-content ui-corner-bottom" id="tabs-1">{% lorem 2 p %}</div>
+			<div class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" id="tabs-2">{% lorem 2 p %}</div>
+			<div class="ui-tabs-panel ui-widget-content ui-corner-bottom ui-tabs-hide" id="tabs-3">{% lorem 2 p %}</div>
+		</div>
+
+		<!-- Dialog -->
+		<hr>
+		<h1>Dialog</h1>
+		<hr>
+		<p><a href="#" id="dialog_link" class="ui-state-default ui-corner-all">Open Dialog</a></p>
+
+
+		<hr>
+		<h1>Overlay and Shadow Classes</h1>
+		<hr>
+		<div style="position: relative; width: 96%; height: 200px; padding: 1% 4%; overflow: hidden;" class="fakewindowcontain">
+			{% lorem 1 p %}
+			<!-- ui-overlay -->
+			<div class="ui-overlay">
+				<div class="ui-widget-overlay"></div>
+				<div class="ui-widget-shadow ui-corner-all" style="width: 302px; height: 152px; position: absolute; left: 50px; top: 30px;"></div>
+			</div>
+			<div style="position: absolute; width: 280px; height: 130px; left: 50px; top: 30px; padding: 10px; overflow: auto;" class="ui-widget ui-widget-content ui-corner-all">
+				{% lorem 5 p %}
+			</div>
+		</div>
+
+		<!-- ui-dialog -->
+		<div id="dialog" title="Dialog Title">
+			{% lorem 3 p %}
+		</div>
+
+
+		<!-- Button -->
+		<hr>
+		<h1 class="demoHeaders">Button</h1>
+		<hr>
+		<button aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only" id="button"><span class="ui-button-text">A button element</span></button>
+		<form style="margin-top: 1em;">
+			<div class="ui-buttonset" id="radioset">
+				<input class="ui-helper-hidden-accessible" id="radio1" name="radio" type="radio"><label aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-left" aria-pressed="false" for="radio1"><span class="ui-button-text">Choice 1</span></label>
+				<input class="ui-helper-hidden-accessible" id="radio2" name="radio" checked="checked" type="radio"><label aria-disabled="false" role="button" aria-pressed="true" class="ui-state-active ui-button ui-widget ui-state-default ui-button-text-only" for="radio2"><span class="ui-button-text">Choice 2</span></label>
+
+				<input class="ui-helper-hidden-accessible" id="radio3" name="radio" type="radio"><label aria-disabled="false" role="button" class="ui-button ui-widget ui-state-default ui-button-text-only ui-corner-right" aria-pressed="false" for="radio3"><span class="ui-button-text">Choice 3</span></label>
+			</div>
+		</form>
+
+		<!-- Autocomplete -->
+		<hr>
+		<h1 class="demoHeaders">Autocomplete</h1>
+		<hr>
+		<div>
+			<input aria-haspopup="true" aria-autocomplete="list" role="textbox" autocomplete="off" class="ui-autocomplete-input" id="autocomplete" style="z-index: 100; position: relative;" title="type &quot;a&quot;">
+		</div>
+
+
+		<!-- Slider -->
+		<hr>
+		<h1 class="demoHeaders">Slider</h1>
+		<hr>
+		<div id="slider"></div>
+
+		<!-- Datepicker -->
+		<hr>
+		<h1 class="demoHeaders">Datepicker</h1>
+		<hr>
+		Date:<div id="datepicker"></div>
+
+
+		<!-- Progressbar -->
+		<hr>
+		<h1 class="demoHeaders">Progressbar</h2>
+		<hr>
+		<style>
+			{% with user_site_profile.theme as theme %}
+			.ui-progressbar-value { background: url('/media/css/themes/{%if theme %}{{theme}}{%else%}ui-lightness{%endif%}/images/ui-bg_progressbar-value.gif') center repeat; }
+			{% endwith %}
+		</style>
+		<div id="progressbar"></div>
+
+		<!-- Highlight / Error -->
+		<hr>
+		<h1 class="demoHeaders">Highlight / Error</h1>
+		<hr>
+		<div class="ui-widget">
+			<div class="ui-state-highlight ui-corner-all" style="margin-top: 20px; padding: 0pt 0.7em;">
+				<p><span class="ui-icon ui-icon-info" style="float: left; margin-right: 0.3em;"></span>
+				<strong>Hey!</strong> Sample ui-state-highlight style.</p>
+
+			</div>
+		</div>
+		<br>
+		<div class="ui-widget">
+			<div class="ui-state-error ui-corner-all" style="padding: 0pt 0.7em;">
+				<p><span class="ui-icon ui-icon-alert" style="float: left; margin-right: 0.3em;"></span>
+				<strong>Alert:</strong> Sample ui-state-error style.</p>
+			</div>
+		</div>
+
+
+		<script>
+			$(function(){
+				// Accordion
+				$("#accordion").accordion({ header: "h3" });
+				// Autocomplete
+				$("#autocomplete").autocomplete({
+					source: ["c++", "java", "php", "coldfusion", "javascript", "asp", "ruby", "python", "c", "scala", "groovy", "haskell", "perl"]
+				});
+				// Button
+				$("#button").button();
+				$("#radioset").buttonset();
+				// Tabs
+				$('#tabs').tabs();
+				// Dialog
+				$('#dialog').dialog({
+					autoOpen: false,
+					width: 600,
+					buttons: {
+						"Ok": function() {
+							$(this).dialog("close");
+						},
+						"Cancel": function() {
+							$(this).dialog("close");
+						}
+					}
+				});
+				// Dialog Link
+				$('#dialog_link').button({
+						icons: {
+							primary: 'ui-icon-newwin'
+						}
+					});
+				$('#dialog_link').click(function(){
+					$('#dialog').dialog('open');
+					return false;
+				});
+				// Datepicker
+				$('#datepicker').datepicker({});
+				// Slider
+				$('#slider').slider({
+					range: true,
+					values: [17, 67]
+				});
+				// Progressbar
+				$("#progressbar").progressbar({
+					value: 20
+				});
+			});
+		</script>
+
+	</body>
+{% endblock %}
