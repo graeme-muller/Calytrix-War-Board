@@ -28,7 +28,7 @@
 			{%comment%}NOTE: user_site_preferences (below) comes from the template context processor - see TEMPLATE_CONTEXT_PROCESSORS in settings.py{%endcomment%}
 			{% with user_site_profile.theme as theme %}
 	        	{% comment %}less CSS stylesheet for current theme{% endcomment %}
-	        	<link rel="stylesheet/less" type="text/css" href="/media/css/themes/{%if theme %}{{theme}}{%else%}ui-lightness{%endif%}/theme.less">
+	        	<link rel="stylesheet/less" type="text/css" href="/media/css/styles.less">
 			{% endwith %}
 	        {% block headcss %}
 	        {% endblock %}
@@ -43,7 +43,7 @@
 	        </script>
 			<script type="text/javascript" src="/jsi18n/"></script>
 			{%comment%}less CSS Javascript http://lesscss.org/{%endcomment%}
-	        <script type="text/javascript" src="/media/js/less-css/less-1.1.3.min.js"></script>
+	        <script type="text/javascript" src="/media/js/less-css/less-1.2.1.min.js"></script>
 			{%comment%}Django Admin Javascript{%endcomment%}
 			<script type="text/javascript" src="/admin/media/js/core.js"></script>
 			<script type="text/javascript" src="/admin/media/js/admin/RelatedObjectLookups.js"></script>
@@ -60,8 +60,177 @@
 
     {% block html_body %}
 		<body id="core">
+			<table width="100%">
+				<tr>
+					<td>
+						<div class="animateTest" style="-moz-animation-delay: 0.2s;
+												        -moz-animation-duration: 1s;
+												        -moz-animation-fill-mode: both;
+												        -moz-animation-timing-function: ease;
+												        -moz-backface-visibility: hidden;
+												        background: none repeat scroll 0 0 #3399CC;
+												        border-radius: 5px 5px 5px 5px;
+												        color: #FFFFFF;
+												        font-weight: bold;
+												        margin: 0 auto;
+												        padding: 40px;
+												        text-align: center;
+												        width: 200px;">
+							<p>Animation Test</p>
+						</div>
+					</td>
+					<td>
+						<div class="animateTest" style="-moz-animation-delay: 0.2s;
+												        -moz-animation-duration: 1s;
+												        -moz-animation-fill-mode: both;
+												        -moz-animation-timing-function: ease;
+												        -moz-backface-visibility: hidden;
+												        background: none repeat scroll 0 0 #3399CC;
+												        border-radius: 5px 5px 5px 5px;
+												        color: #FFFFFF;
+												        font-weight: bold;
+												        margin: 0 auto;
+												        padding: 40px;
+												        text-align: center;
+												        width: 200px;">
+							<p>Animation Test</p>
+						</div>
+					</td>
+					<td>
+						<div class="animateTest" style="-moz-animation-delay: 0.2s;
+												        -moz-animation-duration: 1s;
+												        -moz-animation-fill-mode: both;
+												        -moz-animation-timing-function: ease;
+												        -moz-backface-visibility: hidden;
+												        background: none repeat scroll 0 0 #3399CC;
+												        border-radius: 5px 5px 5px 5px;
+												        color: #FFFFFF;
+												        font-weight: bold;
+												        margin: 0 auto;
+												        padding: 40px;
+												        text-align: center;
+												        width: 200px;">
+							<p>Animation Test</p>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="animateTest" style="-moz-animation-delay: 0.2s;
+												        -moz-animation-duration: 1s;
+												        -moz-animation-fill-mode: both;
+												        -moz-animation-timing-function: ease;
+												        -moz-backface-visibility: hidden;
+												        background: none repeat scroll 0 0 #3399CC;
+												        border-radius: 5px 5px 5px 5px;
+												        color: #FFFFFF;
+												        font-weight: bold;
+												        margin: 0 auto;
+												        padding: 40px;
+												        text-align: center;
+												        width: 200px;">
+							<p>Animation Test</p>
+						</div>
+					</td>
+					<td>
+						<div class="animateTest" style="-moz-animation-delay: 0.2s;
+												        -moz-animation-duration: 1s;
+												        -moz-animation-fill-mode: both;
+												        -moz-animation-timing-function: ease;
+												        -moz-backface-visibility: hidden;
+												        background: none repeat scroll 0 0 #3399CC;
+												        border-radius: 5px 5px 5px 5px;
+												        color: #FFFFFF;
+												        font-weight: bold;
+												        margin: 0 auto;
+												        padding: 40px;
+												        text-align: center;
+												        width: 200px;">
+							<p>Animation Test</p>
+						</div>
+					</td>
+					<td>
+						<div class="animateTest" style="-moz-animation-delay: 0.2s;
+												        -moz-animation-duration: 1s;
+												        -moz-animation-fill-mode: both;
+												        -moz-animation-timing-function: ease;
+												        -moz-backface-visibility: hidden;
+												        background: none repeat scroll 0 0 #3399CC;
+												        border-radius: 5px 5px 5px 5px;
+												        color: #FFFFFF;
+												        font-weight: bold;
+												        margin: 0 auto;
+												        padding: 40px;
+												        text-align: center;
+												        width: 200px;">
+							<p>Animation Test</p>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<div class="animateTest" style="-moz-animation-delay: 0.2s;
+												        -moz-animation-duration: 1s;
+												        -moz-animation-fill-mode: both;
+												        -moz-animation-timing-function: ease;
+												        -moz-backface-visibility: hidden;
+												        background: none repeat scroll 0 0 #3399CC;
+												        border-radius: 5px 5px 5px 5px;
+												        color: #FFFFFF;
+												        font-weight: bold;
+												        margin: 0 auto;
+												        padding: 40px;
+												        text-align: center;
+												        width: 200px;">
+							<p>Animation Test</p>
+						</div>
+					</td>
+					<td>
+						<div class="animateTest" style="-moz-animation-delay: 0.2s;
+												        -moz-animation-duration: 1s;
+												        -moz-animation-fill-mode: both;
+												        -moz-animation-timing-function: ease;
+												        -moz-backface-visibility: hidden;
+												        background: none repeat scroll 0 0 #3399CC;
+												        border-radius: 5px 5px 5px 5px;
+												        color: #FFFFFF;
+												        font-weight: bold;
+												        margin: 0 auto;
+												        padding: 40px;
+												        text-align: center;
+												        width: 200px;">
+							<p>Animation Test</p>
+						</div>
+					</td>
+					<td>
+						<div class="animateTest" style="-moz-animation-delay: 0.2s;
+												        -moz-animation-duration: 1s;
+												        -moz-animation-fill-mode: both;
+												        -moz-animation-timing-function: ease;
+												        -moz-backface-visibility: hidden;
+												        background: none repeat scroll 0 0 #3399CC;
+												        border-radius: 5px 5px 5px 5px;
+												        color: #FFFFFF;
+												        font-weight: bold;
+												        margin: 0 auto;
+												        padding: 40px;
+												        text-align: center;
+												        width: 200px;">
+							<p>Animation Test</p>
+						</div>
+					</td>
+				</tr>
+			</table>
 
-			<h1>Nothing to see here...</h1>
+			<script type="text/javascript">
+				function flipout(){
+					jQuery('.animateTest').removeClass().addClass('flipOutY');
+				};
+				jQuery(document).ready( function(){
+					setTimeout('flipout();', 2000 );
+				});
+			</script>
+
 		</body>
 	{% endblock %}
 </html>
