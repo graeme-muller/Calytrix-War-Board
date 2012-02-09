@@ -1,0 +1,40 @@
+{% extends "main/core.html" %}
+
+{% block html_body %}
+    <div class="errorpage">
+        <h1>An Error Occurred On This Page</h1>
+
+        <p>Error code: <span class="errorcode">404 - Page Not Found</span></p>
+        <p>The page you were looking for or were linked to is no longer available.</p>
+        <p><a href="/">Return Home</a></p>
+
+        <p>Contact <a href="mailto:support@calytrix.com?subject=[404 Error]">Calytrix Support</a> if this problem persists.</p>
+        <p>To help Calytrix Support rectify this problem please expand the error message below, copy it and paste it into the email with your comments.</p>
+        <p>Alternatively you could attach the HTML file containing the error message stored on the server at {{ log_filepath }}</p>
+
+        <p id="display">Display error message</p>
+        <div id="error404" style="display:none;">
+        	{{ traceback|safe }}
+        </div>
+
+        <script type="text/javascript">
+            // Javascript that expands and collapses the django traceback
+            $(document).ready(function()
+            {
+                $("#display").click(function()
+                {
+                    if ( $("#error404").css("display") == "none")
+                    {
+                        $("#error404").css({display: "block"});
+                        $("#display").html('Hide error message');
+                    }
+                    else if ($("#error404").css("display") == "block")
+                    {
+                        $("#error404").css({display: "none"});
+                        $("#display").html('Display error message');
+                    }
+                });
+            });
+        </script>
+    </div>
+{% endblock %}
