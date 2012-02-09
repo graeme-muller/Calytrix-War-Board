@@ -3,8 +3,8 @@ import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-LOG_DIR = r'C:\dev\apache\httpd\2.2.19\logs'
-LOG_FILE = r'application' #will be appended with ".log'
+LOG_DIR = r'/Users/mullsy/Documents/workspace/war-board/logs'
+LOG_FILE = r'war-board' #will be appended with ".log'
 
 ADMINS = (
     # ('Your Name', 'your_email@domain.com'),
@@ -15,7 +15,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',        # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': os.environ.get('APPLICATION_DB', 'django_app_db'), # Or path to database file if using sqlite3.
+        'NAME': os.environ.get('WARBOARD_DB', 'war-board_db'), # Or path to database file if using sqlite3.
         'USER': 'postgres',                                        # Not used with sqlite3.
         'PASSWORD': 'postgres',                                    # Not used with sqlite3.
         'HOST': '',                                                # Set to empty string for localhost. Not used with sqlite3.
@@ -34,7 +34,7 @@ TIME_ZONE = 'Australia/Perth'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-au'
 
 SITE_ID = 1
 
@@ -53,7 +53,7 @@ USE_L10N = True
 
 # Absolute path to the directory that holds media.
 # Example: "/home/media/media.lawrence.com/"
-MEDIA_ROOT = os.path.join(os.environ.get('APPLICATION_ROOT'), 'media')
+MEDIA_ROOT = os.path.join(os.environ.get('WARBOARD_ROOT'), 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash if there is a path component (optional in other cases).
@@ -118,7 +118,7 @@ TEMPLATE_DIRS = (
         # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
         # Always use forward slashes, even on Windows.
         # Don't forget to use absolute paths, not relative paths.
-        os.path.join(os.environ.get('APPLICATION_ROOT'), 'templates').replace('\\','/'),
+        os.path.join(os.environ.get('WARBOARD_ROOT'), 'templates').replace('\\','/'),
     )
 
 INSTALLED_APPS = [

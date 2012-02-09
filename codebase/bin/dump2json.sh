@@ -25,7 +25,7 @@ export OUTPUTFILE=$2
 #============================================================================
 # Dump data from specified database to file
 # ============================================================================
-. ./mentor.env
-pushd $APPLICATION_HOME
+. ./environment.env
+pushd $INJECTPLANNER_SRC
 python manage.py dumpdata --indent=4 > $OUTPUTFILE
 popd

@@ -28,10 +28,10 @@ done
 # ============================================================================
 if [ "$CONFIRM" == "Y" ] || [ "$CONFIRM" == "y" ]
 then
-	. ./APPLICATION.env
+	. ./environment.env
 	dropdb -U postgres $APPLICATION_DB
 	createdb -U postgres $APPLICATION_DB
-	pushd $APPLICATION_HOME
+	pushd $INJECTPLANNER_SRC
 	python manage.py syncdb --noinput
 	popd
 else

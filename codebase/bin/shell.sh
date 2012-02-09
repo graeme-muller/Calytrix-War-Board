@@ -21,8 +21,8 @@ echo
 echo Using database $APPLICATION_DB
 echo
 
-. ./APPLICATION.env
+. ./environment.env
 
-pushd $APPLICATION_HOME
+pushd $WARBOARD_SRC
 python manage.py shell
 popd

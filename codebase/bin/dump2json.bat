@@ -30,7 +30,7 @@ REM ============================================================================
 :DUMPDATA
 	SET APPLICATION_DB=%1
 	SET DATAFILE=%2
-	CD %APPLICATION_SRC%
+	CD %APPLICATION_PYTHON%
 	python manage.py dumpdata --indent=4 > %DATAFILE%
 	CD %CURRENT%
 	GOTO END

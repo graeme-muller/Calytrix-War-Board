@@ -4,7 +4,7 @@ REM --------------------------------------------------
 REM Modify these settings to suit your environment
 REM --------------------------------------------------
 set HOSTNAME=%COMPUTERNAME%
-set PORT=8301
+set PORT=8888
 set POSTGRES_BIN=%PROGRAMFILES%\PostgreSQL\9.0\bin
 set PYTHON_BIN=c:\dev\python\32bit\2.7
 
@@ -21,13 +21,13 @@ REM you are looking at right now)
 set CURRENT=%~dp0
 set WORKSPACE=%CURRENT%..\src
 
-set APPLICATION_ROOT=%WORKSPACE%
+set INJECTPLANNER_ROOT=%WORKSPACE%
 set PYTHON_SRC=%WORKSPACE%\python
-set APPLICATION_SRC=%PYTHON_SRC%\applications
-set DJANGO_HOME=%PYTHON_SRC%\external\django\1.3
-set PYTHONPATH=%DJANGO_HOME%;%APPLICATION_SRC%
+set INJECTPLANNER_SRC=%PYTHON_SRC%\applications
+set DJANGO_HOME=%PYTHON_SRC%\external\django\1.3.1
+set PYTHONPATH=%DJANGO_HOME%;%INJECTPLANNER_SRC%
 set DJANGO_SETTINGS_MODULE=settings
-set TZ=GMT
+REM set TZ=GMT
 REM --------------------------------------------------
 
 REM --------------------------------------------------
@@ -35,14 +35,18 @@ REM Modify the items below if you need to add more
 REM menu options and/or databases
 REM --------------------------------------------------
 :DO_MENU
-	echo %APPLICATION_SRC%
+	echo %INJECTPLANNER_SRC%
 	echo *---------------------------------------------------------*
-	echo "                                                         "
-	echo *                Django Server Utilities                  *
+	echo "                     INJECT PLANNER                      "
+	echo *                    Django Utilities                     *
 	echo "                 on: %HOSTNAME%:%PORT%                   "
 	echo "                                                         "
 	echo * Select Operation:                                       *
 	echo *---------------------------------------------------------*
+	REM --------------------------------------------------
+	REM Show which Python version is in use
+	REM --------------------------------------------------
+	for /f %%v in ('%PYTHON_BIN%\python.exe --version') do echo %%v
 	echo * [r#]   Run server with # DB
 	echo * [s#]   Sync DB to      # DB
 	echo * [c#]   Clear           # DB (Start Fresh)
@@ -54,7 +58,7 @@ REM --------------------------------------------------
 	echo * [ld# filename] loaddata for # DB
 	echo * [test]  Run Test Suite
 	echo *
-	echo * # = 1: WARBOARD
+	echo * # = 1: INJECTPLANNER
 	echo * # = 2: not in use
 	echo * # = 3: not in use
 	echo * # = 4: not in use
@@ -116,28 +120,28 @@ REM --------------------------------------------------
 	GOTO DO_MENU
 
 :DB_A
-	set APPLICATION_DB=warboard_db
-	set APPLICATION_DBFILE=%APPLICATION_DB%
+	set INJECTPLANNER_DB=injectplanner_db
+	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
 	GOTO OPERATIONS
 
 :DB_B
-	set APPLICATION_DB=delete_me
-	set APPLICATION_DBFILE=%APPLICATION_DB%
+	set INJECTPLANNER_DB=delete_me
+	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
 	GOTO OPERATIONS
 
 :DB_C
-	set APPLICATION_DB=delete_me
-	set APPLICATION_DBFILE=%APPLICATION_DB%
+	set INJECTPLANNER_DB=delete_me
+	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
 	GOTO OPERATIONS
 
 :DB_D
-	set APPLICATION_DB=delete_me
-	set APPLICATION_DBFILE=%APPLICATION_DB%
+	set INJECTPLANNER_DB=delete_me
+	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
 	GOTO OPERATIONS
 
 :DB_E
-	set APPLICATION_DB=application_sandbox
-	set APPLICATION_DBFILE=%APPLICATION_DB%
+	set INJECTPLANNER_DB=application_sandbox
+	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
 	GOTO OPERATIONS
 
 REM ------------------- START DB operations
@@ -291,18 +295,18 @@ REM ----------------------------------------------------------------------------
 
 :CLEAR_DB
 	echo *
-	echo * Emptying Database %APPLICATION_DB%...
+	echo * Emptying Database %INJECTPLANNER_DB%...
 	echo *
-	"%POSTGRES_BIN%\dropdb.exe" -U postgres %APPLICATION_DB%
-	"%POSTGRES_BIN%\createdb.exe" -U postgres -E UTF8 %APPLICATION_DB%
-	GOTO APPLICATION_APP_SYNCH
+	"%POSTGRES_BIN%\dropdb.exe" -U postgres %INJECTPLANNER_DB%
+	"%POSTGRES_BIN%\createdb.exe" -U postgres -E UTF8 %INJECTPLANNER_DB%
+	GOTO INJECTPLANNER_APP_SYNCH
 
 :DUMP_DATA
 	SET /P DD_FILENAME=* Please enter full path and filename for data:
 	echo *
-	echo * Dumping Database %APPLICATION_DB% to "%DD_FILENAME%"...
+	echo * Dumping Database %INJECTPLANNER_DB% to "%DD_FILENAME%"...
 	echo *
-	cd %APPLICATION_SRC%
+	cd %INJECTPLANNER_SRC%
 	python manage.py dumpdata --indent=4 > "%DD_FILENAME%"
 	echo * Done.
 	echo *
@@ -311,9 +315,9 @@ REM ----------------------------------------------------------------------------
 :LOAD_DATA
 	SET /P DD_FILENAME=* Please enter full path and filename for JSON data:
 	echo *
-	echo * Loading data from %DD_FILENAME% into Database %APPLICATION_DB%
+	echo * Loading data from %DD_FILENAME% into Database %INJECTPLANNER_DB%
 	echo *
-	cd %APPLICATION_SRC%
+	cd %INJECTPLANNER_SRC%
 	python manage.py loaddata "%DD_FILENAME%"
 	echo * Data loaded.
 	echo *
@@ -321,14 +325,14 @@ REM ----------------------------------------------------------------------------
 
 :SYNCH_DB
 	echo *
-	echo * Synchronising Database to %APPLICATION_DBFILE%...
+	echo * Synchronising Database to %INJECTPLANNER_DBFILE%...
 	echo *
-	"%POSTGRES_BIN%\dropdb.exe" -U postgres %APPLICATION_DB%
-	"%POSTGRES_BIN%\createdb.exe" -U postgres -E UTF8 %APPLICATION_DB%
-	GOTO APPLICATION_APP_SYNCH
+	"%POSTGRES_BIN%\dropdb.exe" -U postgres %INJECTPLANNER_DB%
+	"%POSTGRES_BIN%\createdb.exe" -U postgres -E UTF8 %INJECTPLANNER_DB%
+	GOTO INJECTPLANNER_APP_SYNCH
 
-:APPLICATION_APP_SYNCH
-	cd %APPLICATION_SRC%
+:INJECTPLANNER_APP_SYNCH
+	cd %INJECTPLANNER_SRC%
 	python manage.py syncdb --noinput
 	REM python manage.py loaddata main/fixtures/main.json
 	if %OP% == SYNCRUNSERVER GOTO RUN_SERVER
@@ -336,12 +340,12 @@ REM ----------------------------------------------------------------------------
 	GOTO DO_MORE
 
 :RUN_SERVER
-	cd %APPLICATION_SRC%
+	cd %INJECTPLANNER_SRC%
 	start python manage.py runserver %HOSTNAME%:%PORT%
 	GOTO DO_MORE
 
 :RUN_SHELL
-	cd %APPLICATION_SRC%
+	cd %INJECTPLANNER_SRC%
 	python manage.py shell
 	GOTO DO_MORE
 
@@ -349,15 +353,15 @@ REM ----------------------------------------------------------------------------
 	set TEST_NAME=
 	echo * Please enter a test name, or hit ENTER to run all tests:
 	set /P TEST_NAME=* e.g. APP.TEST_CLASS.TEST_METHOD:
-	set APPLICATION_DB=test_mentor5_test
-	echo Using %APPLICATION_DB% as test database...
-	"%POSTGRES_BIN%\dropdb.exe" -U postgres %APPLICATION_DB%
-	"%POSTGRES_BIN%\createdb.exe" -U postgres %APPLICATION_DB%
-	cd %APPLICATION_SRC%
+	set INJECTPLANNER_DB=test_mentor5_test
+	echo Using %INJECTPLANNER_DB% as test database...
+	"%POSTGRES_BIN%\dropdb.exe" -U postgres %INJECTPLANNER_DB%
+	"%POSTGRES_BIN%\createdb.exe" -U postgres %INJECTPLANNER_DB%
+	cd %INJECTPLANNER_SRC%
 	echo Tests commencing...
 	python manage.py test %TEST_NAME%
-	echo Cleaning up test database %APPLICATION_DB%...
-	"%POSTGRES_BIN%\dropdb.exe" -U postgres %APPLICATION_DB%
+	echo Cleaning up test database %INJECTPLANNER_DB%...
+	"%POSTGRES_BIN%\dropdb.exe" -U postgres %INJECTPLANNER_DB%
 	echo Done!
 	GOTO DO_MORE
 

@@ -25,7 +25,7 @@ REM Provide shell prompt for Django application
 REM ============================================================================
 :SHELL
 	SET APPLICATION_DB=%1
-	CD %APPLICATION_SRC%
+	CD %APPLICATION_PYTHON%
 	python manage.py shell
 	CD %CURRENT%
 	GOTO END

@@ -32,7 +32,7 @@ REM ============================================================================
 	SET DJANGO_SETTINGS_MODULE=settings
 	SET URLHOST=%HOSTNAME%:%PORT%
 	SET TZ=GMT
-	CD %APPLICATION_SRC%
+	CD %APPLICATION_PYTHON%
 	python manage.py runserver %URLHOST%
 	CD %CURRENT%
 	GOTO END

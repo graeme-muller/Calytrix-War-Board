@@ -9,7 +9,7 @@ if [ -z $1 ]
 then
     echo Database name not specified. Exiting.
     echo Usage  : $0 DATABASE_NAME PORT
-    echo Example: $0 myDatabase 8888
+    echo Example: $0 myDatabase 6666
     exit
 fi
 
@@ -20,7 +20,7 @@ if [ -z $2 ]
 then
     echo Port number not specified. Exiting.
     echo Usage  : $0 DATABASE_NAME PORT
-    echo Example: $0 myDatabase 8888
+    echo Example: $0 myDatabase 6666
     exit
 fi
 
@@ -33,12 +33,12 @@ echo
 echo Using database $APPLICATION_DB
 echo
 
-. ./APPLICATION.env
+. ./environment.env
 
 export DJANGO_SETTINGS_MODULE=settings
 export URLHOST=$HOSTNAME:$PORT
 export TZ=GMT
 
-pushd $APPLICATION_HOME
+pushd $WARBOARD_SRC
 python manage.py runserver $URLHOST
 popd

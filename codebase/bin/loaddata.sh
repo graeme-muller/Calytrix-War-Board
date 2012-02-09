@@ -38,8 +38,8 @@ done
 # ============================================================================
 if [ "$CONFIRM" == "Y" ] || [ "$CONFIRM" == "y" ]
 then
-	. ./mentor.env
-	pushd $APPLICATION_HOME
+	. ./environment.env
+	pushd $INJECTPLANNER_SRC
 	python manage.py loaddata $DATAFILE
 	popd
 else

@@ -43,7 +43,7 @@ REM ============================================================================
 REM Load data into database
 REM ============================================================================
 :LOADDATA
-	CD %APPLICATION_SRC%
+	CD %APPLICATION_PYTHON%
 	python manage.py loaddata %DATAFILE%
 	CD %CURRENT%
 	GOTO END

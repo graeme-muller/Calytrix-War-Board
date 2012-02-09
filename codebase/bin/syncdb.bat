@@ -39,7 +39,7 @@ REM ============================================================================
 REM Reset database or abort operation as appropriaten
 REM ============================================================================
 :SYNCDB
-	CD %APPLICATION_SRC%
+	CD %APPLICATION_PYTHON%
 	"%POSTGRES_BIN%\dropdb.exe" -U postgres %APPLICATION_DB%
 	"%POSTGRES_BIN%\createdb.exe" -U postgres -E UTF8 %APPLICATION_DB%
 	python manage.py syncdb --noinput
