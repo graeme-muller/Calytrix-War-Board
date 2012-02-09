@@ -28,10 +28,11 @@ urlpatterns += patterns('',
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
 
-    # Main:
-    (r'^main/', include('main.urls')),
     # QR Codes:
     (r'^qrcode/', include('qrcode.urls')),
+
+    # Main:
+    (r'^', include('main.urls')),
 )
 
 handler404 = 'main.views.server_error_404'

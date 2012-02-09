@@ -53,13 +53,6 @@
 	        <script type="text/javascript" src="/media/js/jquery/jquery-ui-1.8.12.custom.min.js"></script>
 			{%comment%}JQuery Plugin Cookie{%endcomment%}
 	        <script type="text/javascript" src="/media/js/jquery/plugins/jquery.cookie/jquery.cookie.js"></script>
-			{%comment%}JQuery Plugin GMap http://www.smashinglabs.pl/gmap-intro{%endcomment%}
-		    <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-		    <script type="text/javascript" src="/media/js/jquery/plugins/jquery.gmap/jquery.gmap.min.js"></script>
-			{%comment%}JQuery Plugin FullCalendar http://www.smashinglabs.pl/gmap-intro{%endcomment%}
-		    <script type="text/javascript" src="/media/js/jquery/plugins/jquery.fullcalendar/fullcalendar.min.js"></script>
-        	<link rel="stylesheet" type="text/css" href="/media/js/jquery/plugins/jquery.fullcalendar/fullcalendar.css">
-        	<link rel="stylesheet" type="text/css" href="/media/js/jquery/plugins/jquery.fullcalendar/fullcalendar.print.css" media="print">
 	        {% block headjs %}
 	        {% endblock %}
 		</head>
@@ -67,35 +60,8 @@
 
     {% block html_body %}
 		<body id="core">
-			<p>
-			{% now "U T Z O" %}: {% if user.is_authenticated %}{{ user }} is LOGGED IN{% else %}NOT LOGGED IN{% endif %}
-			</p>
-			<hr>
-			<p>
-				Settings:
-				<ul>
-					<li>Theme: {{ user_site_profile.theme }}</li>
-				</ul>
-			</p>
-			<div id="map" style="width:200px; height:200px;">MAP GOES HERE</div>
-			<div id="fullcalendar" style="width:500px; height:400px;"></div>
 
-		    <script>
-		    	$(window).ready(function(){
-		    		$('#map').gMap();
-		    		$('#fullcalendar').fullCalendar({
-		    			theme: true,
-		    			header: {
-		    				left: 'prev,next, today',
-		    				center: 'title',
-		    				right: 'month,agendaWeek,agendaDay'
-		    			},
-		    			editable: true,
-		    			selectable: true
-		    		});
-		    	});
-		    </script>
-
+			<h1>Nothing to see here...</h1>
 		</body>
 	{% endblock %}
 </html>

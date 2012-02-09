@@ -4,9 +4,9 @@ REM --------------------------------------------------
 REM Modify these settings to suit your environment
 REM --------------------------------------------------
 set HOSTNAME=%COMPUTERNAME%
-set PORT=8000
+set PORT=8301
 set POSTGRES_BIN=%PROGRAMFILES%\PostgreSQL\9.0\bin
-set PYTHON_BIN=c:\dev\python\32bit\2.6
+set PYTHON_BIN=c:\dev\python\32bit\2.7
 
 REM --------------------------------------------------
 
@@ -54,7 +54,7 @@ REM --------------------------------------------------
 	echo * [ld# filename] loaddata for # DB
 	echo * [test]  Run Test Suite
 	echo *
-	echo * # = 1: APPLICATION
+	echo * # = 1: WARBOARD
 	echo * # = 2: not in use
 	echo * # = 3: not in use
 	echo * # = 4: not in use
@@ -116,7 +116,7 @@ REM --------------------------------------------------
 	GOTO DO_MENU
 
 :DB_A
-	set APPLICATION_DB=application_db
+	set APPLICATION_DB=warboard_db
 	set APPLICATION_DBFILE=%APPLICATION_DB%
 	GOTO OPERATIONS
 
