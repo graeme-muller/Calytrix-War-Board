@@ -1,7 +1,3 @@
-import os
-
-import settings
-
 from django.db import models
 from django.dispatch import receiver
 from django.contrib import admin
@@ -10,20 +6,6 @@ from django.contrib.auth.models import User
 #--------------------------------------------------------------------------------------------------
 #                    'STATIC' VARIABLES
 #--------------------------------------------------------------------------------------------------
-
-# these theme directories should be available in media/css/themes
-THEME_PATH = os.path.join(settings.MEDIA_ROOT, 'css','themes' )
-# construct a list of available theme choices
-AVAILABLE_THEMES = [x for x in os.listdir(THEME_PATH) if (not x.startswith('.') and os.path.isdir(os.path.join(THEME_PATH, x)))]
-# sort alphabetically
-AVAILABLE_THEMES.sort()
-# determine the default theme
-DEFAULT_THEME = set(AVAILABLE_THEMES).__contains__(settings.DEFAULT_THEME) and settings.DEFAULT_THEME or AVAILABLE_THEMES[0]
-# this next line uses the above list to create nice human readable options
-# for each of the themes defined above. Basically it splits the name at
-# the '-', and capitalises the first letter of each word, so 'black-tie'
-# becomes 'Black Tie'.
-THEME_CHOICES = [(theme, ' '.join(word[0].upper()+word[1:] for word in theme.split('-'))) for theme in AVAILABLE_THEMES]
 
 #--------------------------------------------------------------------------------------------------
 #                    CLASSES
@@ -66,7 +48,6 @@ class UserSiteProfile(models.Model):
     user = models.ForeignKey(User, unique=True)
     # The remaining fields define the information to be stored for the user's profile:
     # theme - colour, fonts etc for the site
-    theme = models.CharField('Theme', max_length='32', choices=THEME_CHOICES, default=DEFAULT_THEME, blank=False)
 
     ##
     #  The purpose of this static method is to ensure that a UserSiteProfile
@@ -108,10 +89,10 @@ class UserSiteProfile(models.Model):
 #
 class UserSiteProfileAdmin(admin.ModelAdmin):
     fieldsets = (
-        ( None, {'fields': ( 'user', 'theme',)} ),
+        ( None, {'fields': ( 'user', )} ),
     )
-    list_display = ('user', 'theme',)
-    list_filter = ('user', 'theme',)
+    list_display = ('user', )
+    list_filter = ('user', )
     search_fields = ('user__username','user__firstname', 'user__lastname')
     ordering = ('user__username',)
 
