@@ -18,14 +18,15 @@ REM The %~dp0 used below is a special environmental
 REM variable which contains the absolute path of the
 REM currently executing batch file (i.e. the file
 REM you are looking at right now)
-set CURRENT=%~dp0
+set CURRENT=%~dsp0
 set WORKSPACE=%CURRENT%..\src
 
-set INJECTPLANNER_ROOT=%WORKSPACE%
+set WARBOARD_ROOT=%WORKSPACE%
 set PYTHON_SRC=%WORKSPACE%\python
-set INJECTPLANNER_SRC=%PYTHON_SRC%\applications
-set DJANGO_HOME=%PYTHON_SRC%\external\django\1.3.1
-set PYTHONPATH=%DJANGO_HOME%;%INJECTPLANNER_SRC%
+set WARBOARD_SRC=%PYTHON_SRC%\applications
+set DJANGO_HOME=%PYTHON_SRC%\external\django\1.3
+echo %DJANGO_HOME%
+set PYTHONPATH=%DJANGO_HOME%;%WARBOARD_SRC%
 set DJANGO_SETTINGS_MODULE=settings
 REM set TZ=GMT
 REM --------------------------------------------------
@@ -35,7 +36,7 @@ REM Modify the items below if you need to add more
 REM menu options and/or databases
 REM --------------------------------------------------
 :DO_MENU
-	echo %INJECTPLANNER_SRC%
+	echo %WARBOARD_SRC%
 	echo *---------------------------------------------------------*
 	echo "                     INJECT PLANNER                      "
 	echo *                    Django Utilities                     *
@@ -58,7 +59,7 @@ REM --------------------------------------------------
 	echo * [ld# filename] loaddata for # DB
 	echo * [test]  Run Test Suite
 	echo *
-	echo * # = 1: INJECTPLANNER
+	echo * # = 1: WARBOARD
 	echo * # = 2: not in use
 	echo * # = 3: not in use
 	echo * # = 4: not in use
@@ -120,28 +121,28 @@ REM --------------------------------------------------
 	GOTO DO_MENU
 
 :DB_A
-	set INJECTPLANNER_DB=injectplanner_db
-	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
+	set WARBOARD_DB=war-board_db
+	set WARBOARD_DBFILE=%WARBOARD_DB%
 	GOTO OPERATIONS
 
 :DB_B
-	set INJECTPLANNER_DB=delete_me
-	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
+	set WARBOARD_DB=delete_me
+	set WARBOARD_DBFILE=%WARBOARD_DB%
 	GOTO OPERATIONS
 
 :DB_C
-	set INJECTPLANNER_DB=delete_me
-	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
+	set WARBOARD_DB=delete_me
+	set WARBOARD_DBFILE=%WARBOARD_DB%
 	GOTO OPERATIONS
 
 :DB_D
-	set INJECTPLANNER_DB=delete_me
-	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
+	set WARBOARD_DB=delete_me
+	set WARBOARD_DBFILE=%WARBOARD_DB%
 	GOTO OPERATIONS
 
 :DB_E
-	set INJECTPLANNER_DB=application_sandbox
-	set INJECTPLANNER_DBFILE=%INJECTPLANNER_DB%
+	set WARBOARD_DB=application_sandbox
+	set WARBOARD_DBFILE=%WARBOARD_DB%
 	GOTO OPERATIONS
 
 REM ------------------- START DB operations
@@ -295,18 +296,18 @@ REM ----------------------------------------------------------------------------
 
 :CLEAR_DB
 	echo *
-	echo * Emptying Database %INJECTPLANNER_DB%...
+	echo * Emptying Database %WARBOARD_DB%...
 	echo *
-	"%POSTGRES_BIN%\dropdb.exe" -U postgres %INJECTPLANNER_DB%
-	"%POSTGRES_BIN%\createdb.exe" -U postgres -E UTF8 %INJECTPLANNER_DB%
-	GOTO INJECTPLANNER_APP_SYNCH
+	"%POSTGRES_BIN%\dropdb.exe" -U postgres %WARBOARD_DB%
+	"%POSTGRES_BIN%\createdb.exe" -U postgres -E UTF8 %WARBOARD_DB%
+	GOTO WARBOARD_APP_SYNCH
 
 :DUMP_DATA
 	SET /P DD_FILENAME=* Please enter full path and filename for data:
 	echo *
-	echo * Dumping Database %INJECTPLANNER_DB% to "%DD_FILENAME%"...
+	echo * Dumping Database %WARBOARD_DB% to "%DD_FILENAME%"...
 	echo *
-	cd %INJECTPLANNER_SRC%
+	cd %WARBOARD_SRC%
 	python manage.py dumpdata --indent=4 > "%DD_FILENAME%"
 	echo * Done.
 	echo *
@@ -315,9 +316,9 @@ REM ----------------------------------------------------------------------------
 :LOAD_DATA
 	SET /P DD_FILENAME=* Please enter full path and filename for JSON data:
 	echo *
-	echo * Loading data from %DD_FILENAME% into Database %INJECTPLANNER_DB%
+	echo * Loading data from %DD_FILENAME% into Database %WARBOARD_DB%
 	echo *
-	cd %INJECTPLANNER_SRC%
+	cd %WARBOARD_SRC%
 	python manage.py loaddata "%DD_FILENAME%"
 	echo * Data loaded.
 	echo *
@@ -325,14 +326,14 @@ REM ----------------------------------------------------------------------------
 
 :SYNCH_DB
 	echo *
-	echo * Synchronising Database to %INJECTPLANNER_DBFILE%...
+	echo * Synchronising Database to %WARBOARD_DBFILE%...
 	echo *
-	"%POSTGRES_BIN%\dropdb.exe" -U postgres %INJECTPLANNER_DB%
-	"%POSTGRES_BIN%\createdb.exe" -U postgres -E UTF8 %INJECTPLANNER_DB%
-	GOTO INJECTPLANNER_APP_SYNCH
+	"%POSTGRES_BIN%\dropdb.exe" -U postgres %WARBOARD_DB%
+	"%POSTGRES_BIN%\createdb.exe" -U postgres -E UTF8 %WARBOARD_DB%
+	GOTO WARBOARD_APP_SYNCH
 
-:INJECTPLANNER_APP_SYNCH
-	cd %INJECTPLANNER_SRC%
+:WARBOARD_APP_SYNCH
+	cd %WARBOARD_SRC%
 	python manage.py syncdb --noinput
 	REM python manage.py loaddata main/fixtures/main.json
 	if %OP% == SYNCRUNSERVER GOTO RUN_SERVER
@@ -340,12 +341,12 @@ REM ----------------------------------------------------------------------------
 	GOTO DO_MORE
 
 :RUN_SERVER
-	cd %INJECTPLANNER_SRC%
+	cd %WARBOARD_SRC%
 	start python manage.py runserver %HOSTNAME%:%PORT%
 	GOTO DO_MORE
 
 :RUN_SHELL
-	cd %INJECTPLANNER_SRC%
+	cd %WARBOARD_SRC%
 	python manage.py shell
 	GOTO DO_MORE
 
@@ -353,15 +354,15 @@ REM ----------------------------------------------------------------------------
 	set TEST_NAME=
 	echo * Please enter a test name, or hit ENTER to run all tests:
 	set /P TEST_NAME=* e.g. APP.TEST_CLASS.TEST_METHOD:
-	set INJECTPLANNER_DB=test_mentor5_test
-	echo Using %INJECTPLANNER_DB% as test database...
-	"%POSTGRES_BIN%\dropdb.exe" -U postgres %INJECTPLANNER_DB%
-	"%POSTGRES_BIN%\createdb.exe" -U postgres %INJECTPLANNER_DB%
-	cd %INJECTPLANNER_SRC%
+	set WARBOARD_DB=test_mentor5_test
+	echo Using %WARBOARD_DB% as test database...
+	"%POSTGRES_BIN%\dropdb.exe" -U postgres %WARBOARD_DB%
+	"%POSTGRES_BIN%\createdb.exe" -U postgres %WARBOARD_DB%
+	cd %WARBOARD_SRC%
 	echo Tests commencing...
 	python manage.py test %TEST_NAME%
-	echo Cleaning up test database %INJECTPLANNER_DB%...
-	"%POSTGRES_BIN%\dropdb.exe" -U postgres %INJECTPLANNER_DB%
+	echo Cleaning up test database %WARBOARD_DB%...
+	"%POSTGRES_BIN%\dropdb.exe" -U postgres %WARBOARD_DB%
 	echo Done!
 	GOTO DO_MORE
 

@@ -3,7 +3,7 @@ import os
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
-LOG_DIR = r'/Users/mullsy/Documents/workspace/war-board/logs'
+LOG_DIR = r'c:\dev\apache\httpd\2.2.19'
 LOG_FILE = r'war-board' #will be appended with ".log'
 
 ADMINS = (

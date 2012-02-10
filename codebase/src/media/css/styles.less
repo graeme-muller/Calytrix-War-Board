@@ -3,3 +3,81 @@
 
 // 3D Animation transition presets
 @import "/media/css/animate/animate.css";
+
+body{
+	background-color:#000;
+	overflow:hidden;
+}
+
+// MIXINS
+// Cross-browser animation setup
+.animation(@delay:0.2s, @duration:1s, @fillMode:both, @timingFunction:ease, @backfaceVisibility:hidden) {
+	-webkit-animation-delay: @delay;
+	   -moz-animation-delay: @delay;
+	    -ms-animation-delay: @delay;
+	        animation-delay: @delay;
+
+	-webkit-animation-duration: @duration;
+       -moz-animation-duration: @duration;
+	    -ms-animation-duration: @duration;
+	        animation-duration: @duration;
+
+	-webkit-animation-fill-mode: @fillMode;
+       -moz-animation-fill-mode: @fillMode;
+	    -ms-animation-fill-mode: @fillMode;
+	        animation-fill-mode: @fillMode;
+
+	-webkit-animation-timing-function: @timingFunction;
+       -moz-animation-timing-function: @timingFunction;
+	    -ms-animation-timing-function: @timingFunction;
+	        animation-timing-function: @timingFunction;
+
+	-webkit-backface-visibility: @backfaceVisibility;
+       -moz-backface-visibility: @backfaceVisibility;
+	    -ms-backface-visibility: @backfaceVisibility;
+	        backface-visibility: @backfaceVisibility;
+}
+
+// -------------------------------------------------------------------------------------------------
+// FLIP PANELS
+.flipPanel{
+	.animation(0.2s, 1s, both, ease, hidden);
+	.border-radius(8px);
+	background: none repeat scroll 0 0 #3399CC;
+	color: #FFFFFF;
+    margin: 5px;
+    padding: 20px;
+    text-align: center;
+
+	// ----------------------------------
+	// PROJECT PANELS
+    &.project-panel{
+		color: #FFFFFF;
+	    font-weight: bold;
+		text-shadow: 0px 0px 5px #000000, 0px 0px 10px #000000;
+
+		div{
+			&.name{
+				font-size:50px;
+			}
+
+			&.version{
+				font-size:25px;
+				margin-top:5%;
+			}
+
+			&.days_remaining{
+				display:block;
+				margin-top:20%;
+				font-size:200px;
+			}
+		}
+	}
+
+	// ----------------------------------
+	// MADFLIPPER PANELS
+	&.madflipper-panel {
+		overflow:hidden;
+	}
+}
+

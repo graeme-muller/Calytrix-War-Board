@@ -1,10 +1,12 @@
-from django.conf.urls.defaults import patterns
+from django.conf.urls.defaults import patterns, include, url
 
 urlpatterns = patterns('',
     # Home View
-    (r'^login/$', 'main.views.do_login'),
-    (r'^login_required_test/$', 'main.views.login_required_test'),
-    (r'^logout/$', 'main.views.do_logout'),
-    (r'^theme_test/$', 'main.views.theme_test'),
-    (r'^$', 'main.views.home'),
+    url(r'^login/$', 'main.views.do_login', name='login'),
+    url(r'^logout/$', 'main.views.do_logout', name='logout'),
+
+    # User preferences
+    (r'^jira/', include('main.jira.urls', namespace='jira', app_name='main')),
+
+    url(r'^$', 'main.views.home', name='home'),
 )

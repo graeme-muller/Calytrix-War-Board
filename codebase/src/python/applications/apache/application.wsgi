@@ -13,8 +13,8 @@ sys.path.append(os.path.join(workspace,'external','django','1.3'))
 ##
 # Set up the environmental variables referred to by the application and Django.
 os.environ['TZ'] = 'GMT'
-os.environ['APPLICATION_DB'] = r'application_db'
-os.environ['APPLICATION_ROOT'] = os.path.split(workspace)[0]
+os.environ['WARBOARD_DB'] = r'warboard_db'
+os.environ['WARBOARD_ROOT'] = os.path.split(workspace)[0]
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 
 ##
@@ -22,8 +22,8 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'settings'
 # it ended up being for debugging purposes
 print >> sys.stderr, '='*100
 print >> sys.stderr, 'DJANGO: DJANGO_SETTINGS_MODULE is:', os.environ['DJANGO_SETTINGS_MODULE']
-print >> sys.stderr, 'DJANGO: APPLICATION_DB is        :', os.environ['APPLICATION_DB']
-print >> sys.stderr, 'DJANGO: APPLICATION_ROOT is      :', os.environ['APPLICATION_ROOT']
+print >> sys.stderr, 'DJANGO: WARBOARD_DB is        :', os.environ['WARBOARD_DB']
+print >> sys.stderr, 'DJANGO: WARBOARD_ROOT is      :', os.environ['WARBOARD_ROOT']
 print >> sys.stderr, 'DJANGO: Python system path is:'
 for p in sys.path:
 	print >> sys.stderr, '-', p
