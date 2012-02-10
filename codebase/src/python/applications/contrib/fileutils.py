@@ -302,3 +302,18 @@ def makeDirTree( dir ):
 
 def get_mimetype(file_ext):
     return MIME_DICT.get(file_ext, MIME_DICT.get('.%s'%file_ext, 'text/plain'))
+
+
+##
+# This class provides a storage mechanism which overwrites existing uploaded files, rather than
+# preserving the existing file by renaming the new one
+#
+#class OverwriteStorage(FileSystemStorage):
+#
+#    # Returns a filename that's free on the target storage system, and
+#    # available for new content to be written to.
+#    def get_available_name(self, name):
+#        # If the filename already exists, remove it as if it was a true file system
+#        if self.exists(name):
+#            self.delete(name)
+#        return name

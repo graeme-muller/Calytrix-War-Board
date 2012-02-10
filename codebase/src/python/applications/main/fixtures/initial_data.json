@@ -16,5 +16,12 @@
             "email": "admin@site.com",
             "date_joined": "2011-01-01 12:00:00"
         }
+    },
+    {
+        "pk": 1,
+        "model": "main.poll",
+        "fields": {
+            "question": "Which beer next?"
+        }
     }
 ]

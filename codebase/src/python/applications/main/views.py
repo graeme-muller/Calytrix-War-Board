@@ -1,17 +1,21 @@
-import os
-import sys
-import datetime
-import logging
 
-import settings
-
-from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.template import RequestContext, loader
-from django.views import debug
 from django.template.context import Context
+from django.views import debug
+from django.views.decorators.csrf import csrf_exempt
+from json.encoder import JSONEncoder
+from main.beerpoll.forms import BeerChoiceForm
+from main.models import BeerChoice, BEER_CHOICES_DICT, Poll
+import datetime
+import logging
+import os
+import settings
+import sys
 
 LOGGER = logging.getLogger(__name__)
 
@@ -52,12 +56,58 @@ def do_logout(request):
     return HttpResponseRedirect('/main/')
 
 
-def home(request):
+def get_beer_data():
+     # count the total of votes cast so far
+    total_votes = 0  
+    all_beers_choices = BeerChoice.objects.all()
+    for beer_choice in all_beers_choices:
+        total_votes += beer_choice.votes
+        
+    # create a useful dictionary of a beer with its percentage of the vote
+    beers_data = [] 
+    for beer_choice in all_beers_choices:
+        percent = int( float( beer_choice.votes) / float( total_votes ) * 100 )
+        beers_data.append( {"name":BEER_CHOICES_DICT.get( beer_choice.beername, "!Unknown Beer!"), "percent":percent })
+        
+    # sort the dictionary in descending order of percentage
+    beers_data.sort( key=lambda x: x.get('percent'), reverse=True )
+    
+    return beers_data
+    
+def home( request ):
+
+    # this is an empty form so propagate each field with default values
+    beer_choice_form = BeerChoiceForm()
+
+    beers_data = get_beer_data();
+         
+    # pass all the forms and variables to the template for rendering
     template = 'main/core.html'
     t = loader.get_template(template)
-    c = RequestContext(request, {
-    });
-    return HttpResponse(t.render(c))
+    c = RequestContext(request, { 'poll':               Poll.objects.get( pk=1 ),
+                                  'beer_choice_form':   beer_choice_form,
+                                  'beers_data':         beers_data[0:3], });
+                                  
+    return HttpResponse( t.render(c) )
+
+@csrf_exempt
+def vote(request, poll_id):
+    beer_name = request.POST["beername"]
+    poll = get_object_or_404( Poll, pk=poll_id )
+    
+    try:
+        beer_choice = BeerChoice.objects.get( beername=beer_name )  
+    except BeerChoice.DoesNotExist:
+        beer_choice = BeerChoice()
+        beer_choice.poll = poll
+        beer_choice.beername = beer_name
+        
+    beer_choice.votes = beer_choice.votes + 1
+    beer_choice.save()
+    
+    beers_data = get_beer_data()[0:3];
+
+    return HttpResponse( JSONEncoder().encode( beers_data ) )
 
 
 def theme_test(request):

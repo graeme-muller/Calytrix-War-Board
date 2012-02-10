@@ -16,9 +16,9 @@ fi
 # ============================================================================
 # Provide shell prompt for Django application
 # ============================================================================
-export APPLICATION_DB=$1
+export WARBOARD_DB=$1
 echo
-echo Using database $APPLICATION_DB
+echo Using database $WARBOARD_DB
 echo
 
 . ./environment.env

@@ -1,5 +1,9 @@
 {% load url from future %}
 
+{% block form_media %}
+	{{ beer_choice_form.media }}
+{% endblock %}
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" dir="ltr">
     {% block html_head %}
@@ -107,8 +111,69 @@
 						</div>
 					</td>
 					<td>
-						<div id="cell_2-2" class="flipPanel">
-							<p>Animation Test</p>
+						<div id="cell_2-2" class="flipPanel beerSurvey-panel">
+							<h3 style="color: #FFFFFF;
+								        font-weight: bold;
+								        padding-bottom: 10px;"> {{ poll.question }} </h3>
+							
+						{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+							
+				        <span>{{ beer_choice_form.beername }}</span>
+						<input id="vote_button" type="submit" value="Vote" />
+						<script>	
+							jQuery( "#vote_button" ).button();
+						
+							function submitVote() {		
+								console.log("hi mum");			
+								var beer_choice_dropdown_value = jQuery( "#{{ beer_choice_form.beername.auto_id }}" ).val();
+								console.log( beer_choice_dropdown_value );
+								jQuery.ajax({ 
+												url:"/1/vote/",
+												type:'POST',
+												dataType: 'json',
+												data:{ "beername":beer_choice_dropdown_value },
+												success: function( data ) {
+														var html = "<table style="text-align: center;">";
+														for ( var i=0; i < data.length ; i++)
+														{
+															html += '<tr>';
+															html += '<td>' + ( i+1 ) + '.</td>';
+															html += '<td>' + data[i]["name"] + '</td>';
+															html += '<td>';
+															html += '<div style="background-color: grey; width: 80px; border: solid 1px black;">';
+															html += '<div style="background-color: blue;  width:' + data[i]["percent"] + '%; text-align: left; padding-left: 10px; color: white;">' + data[i]["percent"] + '%</div>';
+															html += '</div>';
+															html += '</tr>';
+
+														}
+														html += "</table>";
+														jQuery( '#beer_table' ).html( html );
+												},
+												error: function( data ){
+												}
+								});
+							}
+							
+							jQuery( "#vote_button" ).click( submitVote );
+					  		
+						</script>
+							{% csrf_token %}
+							<div id="beer_table">
+								<table>
+								{% for beer in beers_data %}
+									<tr style="padding-left: 10px">
+										<td style="text-align: left;">{{ forloop.counter }}.</td>
+										<td style="text-align: left;">{{ beer.name }}</td>
+										<td>
+											<div style="background-color: grey; width: 80px; border: solid 1px black;">
+												<div style="background-color: blue;  width: {{ beer.percent }}%; text-align: left; padding-left: 10px; color: white;">{{ beer.percent }}%
+												</div>
+											</div>
+										</td>
+									</tr>
+								{% endfor %}
+								</table>
+							</div>
 						</div>
 					</td>
 				</tr>
