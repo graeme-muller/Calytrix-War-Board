@@ -1,4 +1,4 @@
-{% load webdesign %}
+{% load url from future %}
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="EN" lang="EN" dir="ltr">
@@ -25,11 +25,7 @@
 			STYLING
 			-----------------------------------------------------------------------
 			{%endcomment%}
-			{%comment%}NOTE: user_site_preferences (below) comes from the template context processor - see TEMPLATE_CONTEXT_PROCESSORS in settings.py{%endcomment%}
-			{% with user_site_profile.theme as theme %}
-	        	{% comment %}less CSS stylesheet for current theme{% endcomment %}
-	        	<link rel="stylesheet/less" type="text/css" href="/media/css/styles.less">
-			{% endwith %}
+        	<link rel="stylesheet/less" type="text/css" href="/media/css/styles.less">
 	        {% block headcss %}
 	        {% endblock %}
 
@@ -53,6 +49,10 @@
 	        <script type="text/javascript" src="/media/js/jquery/jquery-ui-1.8.12.custom.min.js"></script>
 			{%comment%}JQuery Plugin Cookie{%endcomment%}
 	        <script type="text/javascript" src="/media/js/jquery/plugins/jquery.cookie/jquery.cookie.js"></script>
+			{%comment%}JQuery Plugin Base64{%endcomment%}
+	        <script type="text/javascript" src="/media/js/jquery/plugins/jquery.base64.min.js"></script>
+			{%comment%}WarBoard Javascript{%endcomment%}
+	        <script type="text/javascript" src="/media/js/warboard.js"></script>
 	        {% block headjs %}
 	        {% endblock %}
 		</head>
@@ -63,159 +63,51 @@
 			<table width="100%">
 				<tr>
 					<td>
-						<div class="animateTest" style="-moz-animation-delay: 0.2s;
-												        -moz-animation-duration: 1s;
-												        -moz-animation-fill-mode: both;
-												        -moz-animation-timing-function: ease;
-												        -moz-backface-visibility: hidden;
-												        background: none repeat scroll 0 0 #3399CC;
-												        border-radius: 5px 5px 5px 5px;
-												        color: #FFFFFF;
-												        font-weight: bold;
-												        margin: 0 auto;
-												        padding: 40px;
-												        text-align: center;
-												        width: 200px;">
+						<div id="cell_0-0" class="flipPanel">
 							<p>Animation Test</p>
 						</div>
 					</td>
 					<td>
-						<div class="animateTest" style="-moz-animation-delay: 0.2s;
-												        -moz-animation-duration: 1s;
-												        -moz-animation-fill-mode: both;
-												        -moz-animation-timing-function: ease;
-												        -moz-backface-visibility: hidden;
-												        background: none repeat scroll 0 0 #3399CC;
-												        border-radius: 5px 5px 5px 5px;
-												        color: #FFFFFF;
-												        font-weight: bold;
-												        margin: 0 auto;
-												        padding: 40px;
-												        text-align: center;
-												        width: 200px;">
+						<div id="cell_1-0" class="flipPanel">
 							<p>Animation Test</p>
 						</div>
 					</td>
 					<td>
-						<div class="animateTest" style="-moz-animation-delay: 0.2s;
-												        -moz-animation-duration: 1s;
-												        -moz-animation-fill-mode: both;
-												        -moz-animation-timing-function: ease;
-												        -moz-backface-visibility: hidden;
-												        background: none repeat scroll 0 0 #3399CC;
-												        border-radius: 5px 5px 5px 5px;
-												        color: #FFFFFF;
-												        font-weight: bold;
-												        margin: 0 auto;
-												        padding: 40px;
-												        text-align: center;
-												        width: 200px;">
+						<div id="cell_2-0" class="flipPanel">
 							<p>Animation Test</p>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<div class="animateTest" style="-moz-animation-delay: 0.2s;
-												        -moz-animation-duration: 1s;
-												        -moz-animation-fill-mode: both;
-												        -moz-animation-timing-function: ease;
-												        -moz-backface-visibility: hidden;
-												        background: none repeat scroll 0 0 #3399CC;
-												        border-radius: 5px 5px 5px 5px;
-												        color: #FFFFFF;
-												        font-weight: bold;
-												        margin: 0 auto;
-												        padding: 40px;
-												        text-align: center;
-												        width: 200px;">
+						<div id="cell_0-1" class="flipPanel">
 							<p>Animation Test</p>
 						</div>
 					</td>
 					<td>
-						<div class="animateTest" style="-moz-animation-delay: 0.2s;
-												        -moz-animation-duration: 1s;
-												        -moz-animation-fill-mode: both;
-												        -moz-animation-timing-function: ease;
-												        -moz-backface-visibility: hidden;
-												        background: none repeat scroll 0 0 #3399CC;
-												        border-radius: 5px 5px 5px 5px;
-												        color: #FFFFFF;
-												        font-weight: bold;
-												        margin: 0 auto;
-												        padding: 40px;
-												        text-align: center;
-												        width: 200px;">
+						<div id="cell_1-1" class="flipPanel">
 							<p>Animation Test</p>
 						</div>
 					</td>
 					<td>
-						<div class="animateTest" style="-moz-animation-delay: 0.2s;
-												        -moz-animation-duration: 1s;
-												        -moz-animation-fill-mode: both;
-												        -moz-animation-timing-function: ease;
-												        -moz-backface-visibility: hidden;
-												        background: none repeat scroll 0 0 #3399CC;
-												        border-radius: 5px 5px 5px 5px;
-												        color: #FFFFFF;
-												        font-weight: bold;
-												        margin: 0 auto;
-												        padding: 40px;
-												        text-align: center;
-												        width: 200px;">
+						<div id="cell_2-1" class="flipPanel">
 							<p>Animation Test</p>
 						</div>
 					</td>
 				</tr>
 				<tr>
 					<td>
-						<div class="animateTest" style="-moz-animation-delay: 0.2s;
-												        -moz-animation-duration: 1s;
-												        -moz-animation-fill-mode: both;
-												        -moz-animation-timing-function: ease;
-												        -moz-backface-visibility: hidden;
-												        background: none repeat scroll 0 0 #3399CC;
-												        border-radius: 5px 5px 5px 5px;
-												        color: #FFFFFF;
-												        font-weight: bold;
-												        margin: 0 auto;
-												        padding: 40px;
-												        text-align: center;
-												        width: 200px;">
+						<div id="cell_0-2" class="flipPanel">
 							<p>Animation Test</p>
 						</div>
 					</td>
 					<td>
-						<div class="animateTest" style="-moz-animation-delay: 0.2s;
-												        -moz-animation-duration: 1s;
-												        -moz-animation-fill-mode: both;
-												        -moz-animation-timing-function: ease;
-												        -moz-backface-visibility: hidden;
-												        background: none repeat scroll 0 0 #3399CC;
-												        border-radius: 5px 5px 5px 5px;
-												        color: #FFFFFF;
-												        font-weight: bold;
-												        margin: 0 auto;
-												        padding: 40px;
-												        text-align: center;
-												        width: 200px;">
+						<div id="cell_1-2" class="flipPanel">
 							<p>Animation Test</p>
 						</div>
 					</td>
 					<td>
-						<div class="animateTest" style="-moz-animation-delay: 0.2s;
-												        -moz-animation-duration: 1s;
-												        -moz-animation-fill-mode: both;
-												        -moz-animation-timing-function: ease;
-												        -moz-backface-visibility: hidden;
-												        background: none repeat scroll 0 0 #3399CC;
-												        border-radius: 5px 5px 5px 5px;
-												        color: #FFFFFF;
-												        font-weight: bold;
-												        margin: 0 auto;
-												        padding: 40px;
-												        text-align: center;
-												        width: 200px;">
+						<div id="cell_2-2" class="flipPanel">
 							<p>Animation Test</p>
 						</div>
 					</td>
@@ -223,12 +115,41 @@
 			</table>
 
 			<script type="text/javascript">
-				function flipout(){
-					jQuery('.animateTest').removeClass().addClass('flipOutY');
-				};
-				jQuery(document).ready( function(){
-					setTimeout('flipout();', 2000 );
+				var windowResizeTimerID = null;
+				var windowResizeFunctions = { 'doLayout': WarBoard.doLayout };
+
+				jQuery(document).ready(function(){
+					WarBoard.doLayout();
+					jQuery(window).resize(function(){
+						if ( windowResizeTimerID == null)
+						{
+							// make sure we dont resize on every single little tiny
+							// size adjusment, only every half second
+							windowResizeTimerID = window.setTimeout(function() {
+												windowResizeTimerID = null;
+												for(func in windowResizeFunctions)
+												{
+													windowResizeFunctions[func].call();
+												}
+											}, 500);
+						}
+					});
+
+					var projectIDs = ['10014', '10030', '10102' ];
+					for(var j=0; j<projectIDs.length; j++)
+					{
+						var projectID = projectIDs[j];
+						var jQcell = jQuery('#cell_'+j+'-0');
+						WarBoard.ProjectStatusPanel.init( jQcell, projectID );
+					}
+
+					for(var j=0; j<3; j++)
+					{
+						var jQcell = jQuery('#cell_'+j+'-1');
+						WarBoard.MadFlipperPanel.init( jQcell );
+					}
 				});
+
 			</script>
 
 		</body>

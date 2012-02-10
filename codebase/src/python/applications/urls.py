@@ -32,7 +32,7 @@ urlpatterns += patterns('',
     (r'^qrcode/', include('qrcode.urls')),
 
     # Main:
-    (r'^', include('main.urls')),
+    (r'^', include('main.urls', namespace='main', app_name='main')),
 )
 
 handler404 = 'main.views.server_error_404'
