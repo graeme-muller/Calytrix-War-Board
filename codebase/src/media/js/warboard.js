@@ -11,6 +11,12 @@ var WarBoard = {
 		MadFlipper:{ 'panel-class':'madflipper-panel',
 					 'opts':{}
 				   },
+		BeerOClock:{ 'panel-class':'beeroclock-panel',
+					 'opts':{
+					 	'hour':16,
+					 	'minute':0
+					 }
+				   },
 		Nothing:{ 'panel-class':'nothing-panel',
 				  'opts':{}
 				}
@@ -237,6 +243,65 @@ var WarBoard = {
 			var timeout = setTimeout( "WarBoard.MadFlipperPanel.toggleFlip( jQuery('#"+ cellID +"') );",
 						              flipDelay );
 			WarBoard.MadFlipperPanel.timers[cellID] = timeout;
+		}
+	},
+	//=============================================================================================
+	// BEER O'CLOCK PANEL
+	//=============================================================================================
+	/**
+	 * Create a mad flipper panel
+	 * @param jQcell the jQuery elementwhich contains the panel
+	 * @returns nothing
+	 */
+	BeerOClockPanel: {
+		timers:{},
+		init:function( jQcell ){
+			// This is a Mad Flipper Panel
+			var panelType = WarBoard.Panels.BeerOClock;
+
+			// set up the panel as a mad flipper panel
+			WarBoard.assignPanelClass( jQcell, panelType );
+
+			var cellID = jQcell.get(0).id;
+			var clockID = cellID+'-clock';
+			var clockDiv = jQuery('<div id="'+clockID+'" class="clock"></div>');
+			jQcell.html("<h1>Beer O'Clock</h1>").append(clockDiv);
+
+			var timeout = setTimeout( "WarBoard.BeerOClockPanel.tickTock( jQuery('#"+ clockID +"') );",
+			              1000 );
+		},
+		destroy:function( jQcell ){
+			// clear any remaining timers
+			for( cellID in WarBoard.BeerOClockPanel.timers )
+			{
+				clearTimeout( WarBoard.BeerOClockPanel.timers[cellID] );
+			}
+		},
+		tickTock: function( jQclock ){
+			if(Date.today().is().friday())
+			{
+				var now = new Date();
+				var beerOclock = Date.today().set( { hour:   WarBoard.Panels.BeerOClock.opts.hour,
+													 minute: WarBoard.Panels.BeerOClock.opts.minute} );
+				var diffSeconds = Math.floor ( ( beerOclock.getTime() - now.getTime() ) / 1000 );
+				if( diffSeconds < 0 )
+				{
+					jQclock.html( "DRINK!" );
+				}
+				else
+				{
+					var diffHours = Math.floor( diffSeconds / 3600 );
+					var diffMins = Math.floor( ( diffSeconds / 60 ) % 60 );
+					diffSeconds %= 60;
+
+					jQclock.html( diffHours+":"+(diffMins<10?"0":"")+diffMins+":"+(diffSeconds<10?"0":"")+diffSeconds );
+				}
+
+				var clockID = jQclock.get(0).id;
+				var timeout = setTimeout( "WarBoard.BeerOClockPanel.tickTock( jQuery('#"+ clockID +"') );",
+							              1000 );
+				WarBoard.BeerOClockPanel.timers[clockID] = timeout;
+			}
 		}
 	}
 }

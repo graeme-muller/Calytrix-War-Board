@@ -51,6 +51,8 @@
 	        <script type="text/javascript" src="/media/js/jquery/plugins/jquery.cookie/jquery.cookie.js"></script>
 			{%comment%}JQuery Plugin Base64{%endcomment%}
 	        <script type="text/javascript" src="/media/js/jquery/plugins/jquery.base64.min.js"></script>
+			{%comment%}Date.js Javascript{%endcomment%}
+	        <script type="text/javascript" src="/media/js/date-js/build/date-en-AU.js"></script>
 			{%comment%}WarBoard Javascript{%endcomment%}
 	        <script type="text/javascript" src="/media/js/warboard.js"></script>
 	        {% block headjs %}
@@ -148,6 +150,9 @@
 						var jQcell = jQuery('#cell_'+j+'-1');
 						WarBoard.MadFlipperPanel.init( jQcell );
 					}
+
+					WarBoard.BeerOClockPanel.init( jQuery('#cell_1-2') );
+
 				});
 
 			</script>
