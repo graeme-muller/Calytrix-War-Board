@@ -86,7 +86,7 @@ def home( request ):
     t = loader.get_template(template)
     c = RequestContext(request, { 'poll':               Poll.objects.get( pk=1 ),
                                   'beer_choice_form':   beer_choice_form,
-                                  'beers_data':         beers_data[0:3], });
+                                  'beers_data':         beers_data[0:5], });
                                   
     return HttpResponse( t.render(c) )
 
@@ -105,7 +105,7 @@ def vote(request, poll_id):
     beer_choice.votes = beer_choice.votes + 1
     beer_choice.save()
     
-    beers_data = get_beer_data()[0:3];
+    beers_data = get_beer_data()[0:5];
 
     return HttpResponse( JSONEncoder().encode( beers_data ) )
 

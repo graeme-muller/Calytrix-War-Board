@@ -21,9 +21,20 @@ class Poll( models.Model ):
 
 BEER_CHOICES = (
     ( 'boags_premium',          'Boags Premium' ),
-    ( 'coopers_sparking',       'Coopers Sparkling' ),
+    ( 'coopers_sparking',       'Cooper\'s Sparkling' ),
     ( 'corona',                 'Corona' ),
     ( 'fat_yak',                'Fat Yak' ),
+    ( 'coopers_pale',           'Cooper\'s Pale' ),
+    ( 'swan_draught',           'Swan Draught' ),
+    ( 'little_creatures_pale',  'Little Creature\'s Pale' ),
+    ( 'hoegaarden_white',       'Hoegaarden White' ),
+    ( 'budweiser_budvar',       'Budweiser Budvar' ),
+    ( 'kriek',                  'Cantillon Kriek Lambic' ),
+    ( 'lindemans_framboise',    'Lindemans Framboise' ),
+    ( 'corona',                 'Corona' ),
+    ( 'corona',                 'Corona' ),
+    ( 'corona',                 'Corona' ),
+
 )
 BEER_CHOICES_DICT = dict( BEER_CHOICES )
 

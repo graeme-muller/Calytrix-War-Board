@@ -126,16 +126,14 @@
 							jQuery( "#vote_button" ).button();
 						
 							function submitVote() {		
-								console.log("hi mum");			
 								var beer_choice_dropdown_value = jQuery( "#{{ beer_choice_form.beername.auto_id }}" ).val();
-								console.log( beer_choice_dropdown_value );
 								jQuery.ajax({ 
 												url:"/1/vote/",
 												type:'POST',
 												dataType: 'json',
 												data:{ "beername":beer_choice_dropdown_value },
 												success: function( data ) {
-														var html = "<table style="text-align: center;">";
+														var html = '<table style="text-align: left ;">';
 														for ( var i=0; i < data.length ; i++)
 														{
 															html += '<tr>';
@@ -155,9 +153,8 @@
 												}
 								});
 							}
-							
+					  		jQuery( "#vote_button" ).css( "button span { background: transparent url('bg_button_span.gif') no-repeat; display: block; line-height: 14px; padding: 5px 0 5px 18px;}" );
 							jQuery( "#vote_button" ).click( submitVote );
-					  		
 						</script>
 							{% csrf_token %}
 							<div id="beer_table">
