@@ -31,9 +31,11 @@ BEER_CHOICES = (
     ( 'budweiser_budvar',       'Budweiser Budvar' ),
     ( 'kriek',                  'Cantillon Kriek Lambic' ),
     ( 'lindemans_framboise',    'Lindemans Framboise' ),
-    ( 'corona',                 'Corona' ),
-    ( 'corona',                 'Corona' ),
-    ( 'corona',                 'Corona' ),
+    ( 'kilkenny_draught',       'Kilkenny Draught' ),
+    ( 'kingfisher',             'Kingfisher' ),
+    ( 'Tiger',                  'Tiger Larger' ),
+    ( 'coopers_dr_tims',        'Cooper\'s Dr Tim\'s Traditional Ale'),
+
 
 )
 BEER_CHOICES_DICT = dict( BEER_CHOICES )

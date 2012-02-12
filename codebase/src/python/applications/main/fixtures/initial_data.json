@@ -13,7 +13,7 @@
             "groups": [],
             "user_permissions": [],
             "password": "sha1$7f98b$88531dba242bef1c4502411b195a229f08541c06",
-            "email": "admin@site.com",
+            "email": "andrew.laws@calytrix.com; graeme.muller@calytrix.com",
             "date_joined": "2011-01-01 12:00:00"
         }
     },
@@ -21,7 +21,7 @@
         "pk": 1,
         "model": "main.poll",
         "fields": {
-            "question": "Which beer next?"
+            "question": "Vote for your favourite beer"
         }
     }
 ]
