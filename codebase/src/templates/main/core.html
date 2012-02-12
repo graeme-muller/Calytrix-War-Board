@@ -103,12 +103,12 @@
 				</tr>
 				<tr>
 					<td>
-						<div id="cell_0-2" class="flipPanel" style="background-color: white">
+						<div id="cell_0-2" class="flipPanel" style="background-color: #222">
 						<iframe type="text/html" 
-								width=400 
-								height=200 
-								src="http://www.youtube.com/embed/7vQ2JT1iggo?rel=0&amp;autohide=1&amp;autoplay=1&amp;showinfo=0" 
-								frameborder=0 
+								width=100%
+								height=100%
+								src="http://www.youtube.com/embed/7vQ2JT1iggo?rel=0&amploop=1&amp;autohide=1&amp;autoplay=1&amp;" 
+								frameborder=10 
 								allowfullscreen="">
 						</iframe>					
 					</td>
@@ -120,12 +120,13 @@
 					<td>
 						<div id="cell_2-2" class="flipPanel beerSurvey-panel">
 							<h3 style="color: #FFFFFF;
-								        font-weight: bold;
-								        padding-bottom: 10px;"> {{ poll.question }} </h3>
+								       font-weight: bold;
+								       padding-bottom: 10px;"> {{ poll.question }} 
+					       </h3>
 							
 						{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 							
-				        <span>{{ beer_choice_form.beername }}</span>
+				        <span >{{ beer_choice_form.beername }}</span>
 						<input id="vote_button" type="submit" value="Vote" />
 						<script>	
 							jQuery( "#vote_button" ).button();
@@ -169,7 +170,7 @@
 										<td style="text-align: left;">{{ forloop.counter }}.</td>
 										<td style="text-align: left;">{{ beer.name }}</td>
 										<td>
-											<div style="background-color: grey; width: 80px; border: solid 1px black;">
+											<div style="background-color: grey; width: 80%; border: solid 1px black;">
 												<div style="background-color: blue;  width: {{ beer.percent }}%; text-align: left; padding-left: 10px; color: white;">{{ beer.percent }}%
 												</div>
 											</div>
